@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<h2 style="text-align:center;">Products</h2>
+
+<ul id="productList"></ul>
+
+<script>
+    const token = localStorage.getItem("token");
+
+    fetch("http://localhost:8080/products", {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        const list = document.getElementById("productList");
+
+        data.forEach(p => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <strong>${p.name}</strong><br>
+                Category: ${p.category}<br>
+                Price: ₹${p.sellingPrice}<br>
+                Stock: ${p.stockQuantity}
+            `;
+            list.appendChild(li);
+        });
+    });
+</script>
+
+</body>
+</html>

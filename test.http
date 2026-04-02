@@ -1,0 +1,16 @@
+### Add Product
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "Rice",
+  "category": "Food",
+  "costPrice": 50,
+  "sellingPrice": 60,
+  "stockQuantity": 100
+}
+
+###
+
+### Get All Products
+GET http://localhost:8080/products

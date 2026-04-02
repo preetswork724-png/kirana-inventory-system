@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+</head>
+<body>
+
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Name">
+<input id="category" placeholder="Category">
+<input id="cost" placeholder="Cost">
+<input id="selling" placeholder="Selling">
+<input id="stock" placeholder="Stock">
+
+<button onclick="addProduct()">Add</button>
+
+<script>
+    function addProduct() {
+        const token = localStorage.getItem("token");
+
+        fetch("http://localhost:8080/products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify({
+                name: document.getElementById("name").value,
+                category: document.getElementById("category").value,
+                costPrice: document.getElementById("cost").value,
+                sellingPrice: document.getElementById("selling").value,
+                stockQuantity: document.getElementById("stock").value
+            })
+        })
+        .then(() => alert("Product added"));
+    }
+</script>
+
+</body>
+</html>
